@@ -1,0 +1,30 @@
+{
+	"name": "advent-of-code",
+	"version": "1.0.0",
+	"description": "Advent of Code solutions in Typescript.",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "tsc"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SilkRose/Advent-of-Code.git"
+	},
+	"contributors": [
+		"Silk Rose"
+	],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/SilkRose/Advent-of-Code/issues"
+	},
+	"homepage": "https://github.com/SilkRose/Advent-of-Code#readme",
+	"dependencies": {
+		"node-fetch": "^3.3.2"
+	},
+	"devDependencies": {
+		"@total-typescript/ts-reset": "^0.5.1",
+		"@types/node": "^20.8.8",
+		"typescript": "^5.2.2"
+	}
+}

@@ -1,2 +1,4 @@
-/cookies.txt
-input.txt
+node_modules
+dist
+input
+cookie
