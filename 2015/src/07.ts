@@ -6,7 +6,12 @@ type signal = { [key: string]: number };
 async function mane() {
 	const input = (await get_input(2015, 7)).trim().split("\n");
 	let signals: signal = {};
-	console.log(get_signal(input, signals, "a"));
+	const a = get_signal(input, signals, "a");
+	signals = {};
+	signals["b"] = a;
+	const b = get_signal(input, signals, "a");
+	console.log("Part 1: " + a);
+	console.log("Part 2: " + b);
 }
 
 function get_signal(input: string[], signals: signal, signal: string): number {
