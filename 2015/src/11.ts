@@ -1,7 +1,13 @@
 import "@total-typescript/ts-reset";
 
 async function mane() {
-	let pw = "cqjxjnds";
+	const pw1 = get_new_pw("cqjxjnds");
+	const pw2 = get_new_pw(pw1);
+	console.log("Part 1: " + pw1);
+	console.log("Part 2: " + pw2);
+}
+
+function get_new_pw(pw: string): string {
 	let matches = false;
 	const pattern = /[iol]/;
 	const alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -9,7 +15,7 @@ async function mane() {
 		pw = increment_pw(pw, alphabet);
 		matches = check_pw(pw, pattern, alphabet);
 	}
-	console.log(pw);
+	return pw;
 }
 
 function increment_pw(pw: string, alphabet: string): string {
