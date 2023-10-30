@@ -18,11 +18,13 @@ async function mane() {
 		)
 	);
 	const city_distances = get_city_distances(cities, input);
-	let shortest = get_distances([], cities, city_distances, []).sort(
+	const distances = get_distances([], cities, city_distances, []).sort(
 		(a, b) => a - b
-	)[0];
-
-	console.log(shortest);
+	);
+	const part_one = distances[0];
+	const part_two = distances[distances.length - 1];
+	console.log("Part 1: " + part_one);
+	console.log("Part 2: " + part_two);
 }
 
 function get_city_distances(cities: string[], input: string[]): Distances {
