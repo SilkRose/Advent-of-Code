@@ -7,8 +7,11 @@ async function mane() {
 	const input = (await get_input(2015, 15)).trim().split("\n");
 	const ingredients = get_stats(input);
 	const scores = get_scores(ingredients);
-	let part_one = scores.sort((a, b) => b - a)[0];
+	const [score, calory] = scores;
+	const part_one = score.sort((a, b) => b - a)[0];
+	const part_two = calory.sort((a, b) => b - a)[0];
 	console.log("Part 1: " + part_one);
+	console.log("Part 2: " + part_two);
 }
 
 function get_stats(input: string[]): Ingredients {
@@ -35,31 +38,38 @@ function get_stats(input: string[]): Ingredients {
 	return ingredients;
 }
 
-function get_scores(ingredients: Ingredients): number[] {
-	const scores = [];
+function get_scores(ingredients: Ingredients): [number[], number[]] {
+	let scores = [];
+	let calory_scores = [];
+	let [score, calory] = [0, false]
 	for (let s = 0; s <= 100; s++) {
 		for (let b = 0; b <= 100 - s; b++) {
 			for (let c = 0; c <= 100 - s - b; c++) {
 				const a = 100 - s - b - c;
-				scores.push(calc_score(ingredients, [s, b, c, a]));
+				[score, calory] = calc_score(ingredients, [s, b, c, a])
+				if (calory) calory_scores.push(score)
+				scores.push(score);
 			}
 		}
 	}
-	return scores;
+	return [scores, calory_scores];
 }
 
-function calc_score(ingredients: Ingredients, amounts: number[]): number {
+function calc_score(ingredients: Ingredients, amounts: number[]): [number, boolean] {
 	let score = 0;
 	let i = 0;
 	let capacity = [];
 	let durability = [];
 	let flavor = [];
 	let texture = [];
+	let calories = [];
+	let calory_match = false;
 	for (const ingredient in ingredients) {
 		capacity.push(amounts[i] * ingredients[ingredient]["capacity"]);
 		durability.push(amounts[i] * ingredients[ingredient]["durability"]);
 		flavor.push(amounts[i] * ingredients[ingredient]["flavor"]);
 		texture.push(amounts[i] * ingredients[ingredient]["texture"]);
+		calories.push(amounts[i] * ingredients[ingredient]["calories"]);
 		i++;
 	}
 	score =
@@ -79,7 +89,8 @@ function calc_score(ingredients: Ingredients, amounts: number[]): number {
 			0,
 			texture.reduce((a, b) => a + b)
 		);
-	return score;
+	if (calories.reduce((a, b) => a + b) === 500) calory_match = true;
+	return [score, calory_match];
 }
 
 mane();
