@@ -6,13 +6,17 @@ type Reindeer = { [key: string]: { [key: string]: number } };
 async function mane() {
 	const input = (await get_input(2015, 14)).trim().split("\n");
 	const time = 2503;
-	let reindeer = get_stats(input);
-	reindeer = get_scores(reindeer, time);
+	const reindeer = get_stats(input);
+	const results = fly(reindeer, time);
+	let distance = 0;
 	let score = 0;
-	for (const deer in reindeer) {
-		if (reindeer[deer]["score"] >= score) score = reindeer[deer]["score"];
+	for (const deer in results) {
+		if (results[deer]["score"] >= score) score = results[deer]["score"];
+		if (results[deer]["distance"] > distance)
+			distance = results[deer]["distance"];
 	}
-	console.log(score);
+	console.log("Part 1: " + distance);
+	console.log("Part 2: " + score);
 }
 
 function get_stats(input: string[]): Reindeer {
@@ -37,7 +41,7 @@ function get_stats(input: string[]): Reindeer {
 	return reindeer;
 }
 
-function get_scores(reindeer: Reindeer, time: number): Reindeer {
+function fly(reindeer: Reindeer, time: number): Reindeer {
 	for (const deer in reindeer) {
 		reindeer[deer]["score"] = 0;
 		reindeer[deer]["flying"] = 1;
