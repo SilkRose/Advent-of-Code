@@ -19,8 +19,10 @@ const target: { [key: string]: number } = {
 async function mane() {
 	const input = (await get_input(2015, 16)).trim().split("\n");
 	const aunts = get_aunts(input);
-	const part_one = find_aunt(aunts);
+	const part_one = find_aunt(aunts, false);
+	const part_two = find_aunt(aunts, true);
 	console.log("Part 1: " + part_one);
+	console.log("Part 2: " + part_two);
 }
 
 function get_aunts(input: string[]): Aunts {
@@ -37,10 +39,28 @@ function get_aunts(input: string[]): Aunts {
 	return aunts;
 }
 
-function find_aunt(aunts: Aunts): string {
+function find_aunt(aunts: Aunts, compare: boolean): string {
 	loop: for (const aunt in aunts) {
 		for (const property in aunts[aunt]) {
-			if (aunts[aunt][property] !== target[property]) continue loop;
+			if (compare) {
+				if (property === "cats" || property === "trees") {
+					if (aunts[aunt][property] <= target[property]) {
+						continue loop;
+					}
+				} else if (
+					property === "pomeranians" ||
+					property === "goldfish"
+				) {
+					if (aunts[aunt][property] >= target[property]) {
+						continue loop;
+					}
+				} else {
+					if (aunts[aunt][property] !== target[property])
+						continue loop;
+				}
+			} else {
+				if (aunts[aunt][property] !== target[property]) continue loop;
+			}
 		}
 		return aunt;
 	}
