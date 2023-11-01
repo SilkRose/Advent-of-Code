@@ -19,8 +19,8 @@ const target: { [key: string]: number } = {
 async function mane() {
 	const input = (await get_input(2015, 16)).trim().split("\n");
 	const aunts = get_aunts(input);
-	let match = find_aunt(aunts);
-	console.log(aunts, match);
+	const part_one = find_aunt(aunts);
+	console.log("Part 1: " + part_one);
 }
 
 function get_aunts(input: string[]): Aunts {
@@ -38,15 +38,13 @@ function get_aunts(input: string[]): Aunts {
 }
 
 function find_aunt(aunts: Aunts): string {
-	let match = "";
-	loop :for (const aunt in aunts) {
+	loop: for (const aunt in aunts) {
 		for (const property in aunts[aunt]) {
-			if (aunts[aunt][property] !== target[property]) break;
-				match = aunt;
-				break loop;
+			if (aunts[aunt][property] !== target[property]) continue loop;
 		}
+		return aunt;
 	}
-	return match;
+	throw new Error("Failed to find match.");
 }
 
 mane();
