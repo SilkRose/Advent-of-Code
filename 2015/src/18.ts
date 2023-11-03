@@ -10,21 +10,21 @@ async function mane() {
 
 function get_map(input: string[]): boolean[][] {
 	let map = [];
-	for (const line of input) {
-		let row = [];
-		const chars = line.split("");
-		for (const char of chars) {
-			if (char === ".") row.push(false);
-			if (char === "#") row.push(true);
+	for (let x = 0; x < input[0].length; x++) {
+		let column = [];
+		const chars = input[x].split("");
+		for (let y = 0; y < chars.length; y++) {
+			if (chars[y] === ".") column.push(false);
+			if (chars[y] === "#") column.push(true);
 		}
-		map.push(row);
+		map.push(column);
 	}
 	return map;
 }
 
 function run_sim(map: boolean[][]): number {
-	for (let i = 0; i <= 100; i++) {
-		const old_map = [...map];
+	for (let i = 0; i < 100; i++) {
+		const old_map = map.map(m => [...m]);
 		for (let x = 0; x < map.length; x++) {
 			for (let y = 0; y < map[x].length; y++) {
 				map[x][y] = check_light(old_map, old_map[x][y], x, y);
