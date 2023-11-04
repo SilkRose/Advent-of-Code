@@ -1,24 +1,27 @@
 import "@total-typescript/ts-reset";
-import * as fs from 'fs';
-import fetch from 'node-fetch';
+import * as fs from "fs";
+import fetch from "node-fetch";
 import * as path from "path";
 import { exit } from "process";
 
-const cookie_path = path.resolve("../cookie")
+const cookie_path = path.resolve("../cookie");
 
 export async function get_input(year: number, day: number): Promise<string> {
-	const input_path = path.resolve(`./input/${year}-${day}.txt`)
+	const input_path = path.resolve(`./input/${year}-${day}.txt`);
 	if (fs.existsSync(input_path)) {
 		return fs.readFileSync(input_path).toString();
 	}
 	mkdir("./input/");
-	const cookie = fs.readFileSync(cookie_path, 'utf8').trim();
+	const cookie = fs.readFileSync(cookie_path, "utf8").trim();
 	const opts = {
 		headers: {
-			'Cookie': `session=${cookie}`
-		}
+			Cookie: `session=${cookie}`,
+		},
 	};
-	const result = await fetch(`https://adventofcode.com/${year}/day/${day}/input`, opts);
+	const result = await fetch(
+		`https://adventofcode.com/${year}/day/${day}/input`,
+		opts
+	);
 	if (result.ok) {
 		fs.writeFileSync(input_path, await result.text());
 		return fs.readFileSync(input_path).toString();
