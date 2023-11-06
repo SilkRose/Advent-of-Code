@@ -6,8 +6,8 @@ async function mane() {
 	let nice_count_one = 0;
 	let nice_count_two = 0;
 	for (let string of input) {
-		if (check_rule_set_one(string)) nice_count_one++
-		if (check_rule_set_two(string)) nice_count_two++
+		if (check_rule_set_one(string)) nice_count_one++;
+		if (check_rule_set_two(string)) nice_count_two++;
 	}
 	console.log("Part 1: " + nice_count_one);
 	console.log("Part 2: " + nice_count_two);
