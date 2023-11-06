@@ -43,10 +43,12 @@ function get_houses(visited: number[][]): number {
 	let houses = 0;
 	for (let i = 0; i < sorted.length; i++) {
 		let element = sorted[i];
-		if (i === 0
-			|| element[0] !== sorted[i - 1][0]
-			|| element[1] !== sorted[i - 1][1]) {
-			houses += 1
+		if (
+			i === 0 ||
+			element[0] !== sorted[i - 1][0] ||
+			element[1] !== sorted[i - 1][1]
+		) {
+			houses += 1;
 		}
 	}
 	return houses;
