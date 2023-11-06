@@ -58,9 +58,9 @@ function fly(reindeer: Reindeer, time: number): Reindeer {
 			}
 			if (reindeer[deer]["change_in"] === 0) {
 				if (reindeer[deer]["flying"] === 1) {
-					reindeer[deer]["change_in"] = reindeer[deer]["rest_time"]
+					reindeer[deer]["change_in"] = reindeer[deer]["rest_time"];
 				} else {
-					reindeer[deer]["change_in"] = reindeer[deer]["flight_time"]
+					reindeer[deer]["change_in"] = reindeer[deer]["flight_time"];
 				}
 				reindeer[deer]["flying"] =
 					reindeer[deer]["flying"] === 1 ? 0 : 1;
