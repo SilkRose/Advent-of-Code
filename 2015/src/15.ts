@@ -41,13 +41,13 @@ function get_stats(input: string[]): Ingredients {
 function get_scores(ingredients: Ingredients): [number[], number[]] {
 	let scores = [];
 	let calory_scores = [];
-	let [score, calory] = [0, false]
+	let [score, calory] = [0, false];
 	for (let s = 0; s <= 100; s++) {
 		for (let b = 0; b <= 100 - s; b++) {
 			for (let c = 0; c <= 100 - s - b; c++) {
 				const a = 100 - s - b - c;
-				[score, calory] = calc_score(ingredients, [s, b, c, a])
-				if (calory) calory_scores.push(score)
+				[score, calory] = calc_score(ingredients, [s, b, c, a]);
+				if (calory) calory_scores.push(score);
 				scores.push(score);
 			}
 		}
@@ -55,7 +55,10 @@ function get_scores(ingredients: Ingredients): [number[], number[]] {
 	return [scores, calory_scores];
 }
 
-function calc_score(ingredients: Ingredients, amounts: number[]): [number, boolean] {
+function calc_score(
+	ingredients: Ingredients,
+	amounts: number[]
+): [number, boolean] {
 	let score = 0;
 	let i = 0;
 	let capacity = [];
