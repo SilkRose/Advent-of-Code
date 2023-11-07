@@ -48,9 +48,11 @@ async function mane() {
 		Armor: 0,
 	};
 	const shop: Shop = get_shop(input1);
-	const winning_costs = run_fights(shop, player, boss);
+	const [winning_costs, losing_costs] = run_fights(shop, player, boss);
 	const part_one = winning_costs.sort((a, b) => a - b)[0];
+	const part_two = losing_costs.sort((a, b) => b - a)[0];
 	console.log("Part 1: " + part_one);
+	console.log("Part 2: " + part_two);
 }
 
 function get_shop(shop_input: string): Shop {
@@ -79,8 +81,9 @@ function get_shop(shop_input: string): Shop {
 	return shop;
 }
 
-function run_fights(shop: Shop, player: Entity, boss: Entity): number[] {
+function run_fights(shop: Shop, player: Entity, boss: Entity): [number[], number[]] {
 	let wining_costs: number[] = [];
+	let losing_costs: number[] = [];
 	for (let weapon in shop["Weapons"]) {
 		for (let armor in shop["Armor"]) {
 			for (let ring1 in shop["Rings"]) {
@@ -103,12 +106,14 @@ function run_fights(shop: Shop, player: Entity, boss: Entity): number[] {
 						shop["Rings"][ring2]["Armor"];
 					if (sim_fight(local_player, local_boss)) {
 						wining_costs.push(cost);
+					} else {
+						losing_costs.push(cost);
 					}
 				}
 			}
 		}
 	}
-	return wining_costs;
+	return [wining_costs, losing_costs];
 }
 
 function sim_fight(player: Entity, boss: Entity): boolean {
