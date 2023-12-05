@@ -4,10 +4,9 @@ import fetch from "node-fetch";
 import * as path from "path";
 import { exit } from "process";
 
-const cookie_path = path.resolve("../cookie");
-
-export async function get_input(year: number, day: number): Promise<string> {
-	const input_path = path.resolve(`./input/${year}-${day}.txt`);
+export async function get_input(pony: string, year: number, day: number): Promise<string> {
+	const cookie_path = path.resolve(`../cookie_${pony}`);
+	const input_path = path.resolve(`./input/${year}-${day}-${pony}.txt`);
 	if (fs.existsSync(input_path)) {
 		return fs.readFileSync(input_path).toString();
 	}

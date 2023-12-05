@@ -6,7 +6,13 @@ import { get_input } from "./lib.js";
 mane();
 
 async function mane() {
-	const input = (await get_input(2023, 1)).trim();
+	await solve("a");
+	await solve("s");
+	
+}
+
+async function solve(pony: string) {
+	const input = (await get_input(pony, 2023, 1)).trim();
 	const part1 = input
 		.split("\n")
 		.map((l) => {
@@ -17,6 +23,6 @@ async function mane() {
 		})
 		.reduce((a, b) => a + b);
 
-	console.log("Part 1: " + part1);
+	console.log(`${pony} Part 1: ${part1}`);
 	console.log("Part 2: ");
 }
